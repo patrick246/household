@@ -1,5 +1,6 @@
 package de.patrick246.household.inventory.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @Value
 @With
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor_ = @JsonCreator)
 @Builder
 public class Item {
     @Id
@@ -27,5 +28,6 @@ public class Item {
 
     private Integer target;
     private Integer value;
-    private byte[] picture;
+
+    private String description;
 }

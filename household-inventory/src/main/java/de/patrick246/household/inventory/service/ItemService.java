@@ -1,6 +1,7 @@
 package de.patrick246.household.inventory.service;
 
 import de.patrick246.household.inventory.api.NewItemContainer;
+import de.patrick246.household.inventory.api.ResourceNotFoundException;
 import de.patrick246.household.inventory.entity.Item;
 import de.patrick246.household.inventory.entity.Picture;
 import de.patrick246.household.inventory.repository.ItemRepository;
@@ -45,8 +46,28 @@ public class ItemService {
                 .barcode(newItem.getBarcode())
                 .target(newItem.getTarget())
                 .value(newItem.getValue())
+                .description(newItem.getDescription())
                 .build();
 
         return itemRepository.save(item);
+    }
+
+    public Item modifyItem(ObjectId id, NewItemContainer modifiedItem) {
+        return itemRepository.findById(id)
+                .map(item -> item
+                        .withName(modifiedItem.getName())
+                        .withLocation(modifiedItem.getLocation())
+                        .withCount(modifiedItem.getCount() != null ? modifiedItem.getCount() : 0)
+                        .withBarcode(modifiedItem.getBarcode())
+                        .withTarget(modifiedItem.getTarget())
+                        .withValue(modifiedItem.getValue())
+                        .withDescription(modifiedItem.getDescription())
+                )
+                .map(itemRepository::save)
+                .orElseThrow(() -> new ResourceNotFoundException("item", id.toString()));
+    }
+
+    public void deleteItem(ObjectId id) {
+        itemRepository.deleteById(id);
     }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import java.util.Optional;
 @Slf4j
 public class ItemController {
 
-    private ItemService itemService;
+    private final ItemService itemService;
 
     @GetMapping
     public ResponseContainer<Item> getItems(
@@ -81,9 +82,25 @@ public class ItemController {
 
     @PostMapping
     public Item createItem(
-            @RequestBody NewItemContainer newItem
+            @RequestBody @Valid NewItemContainer newItem
     ) {
         return itemService.createItem(newItem);
+    }
+
+    @PutMapping("id/{id}")
+    public Item modifyItem(
+            @PathVariable ObjectId id,
+            @RequestBody @Valid NewItemContainer modifiedItem
+    ) {
+        return itemService.modifyItem(id, modifiedItem);
+    }
+
+    @DeleteMapping("id/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteItem(
+            @PathVariable ObjectId id
+    ) {
+        itemService.deleteItem(id);
     }
 
 }
