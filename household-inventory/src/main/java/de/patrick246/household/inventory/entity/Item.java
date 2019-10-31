@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 public class Item {
     @Id
-    @With(value = AccessLevel.NONE)
     private ObjectId id;
     @Indexed
     private String barcode;
