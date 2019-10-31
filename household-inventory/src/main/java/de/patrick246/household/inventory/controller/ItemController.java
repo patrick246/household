@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -70,13 +71,25 @@ public class ItemController {
     private String getMIMEType(byte[] data) {
         try {
             String guessedMIMEType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(data));
-            if (!guessedMIMEType.startsWith("image/")) {
+            if (guessedMIMEType == null || !guessedMIMEType.startsWith("image/")) {
                 return "application/octet-stream";
             }
             return guessedMIMEType;
         } catch (IOException e) {
             log.warn("Error guessing image content");
             return "application/octet-stream";
+        }
+    }
+
+    @PostMapping("id/{id}/image")
+    public void uploadImage(
+            @PathVariable ObjectId id,
+            @RequestParam MultipartFile image
+    ) {
+        try {
+            itemService.uploadFile(id, image.getOriginalFilename(), image.getBytes());
+        } catch (IOException e) {
+            log.error("IOException while uploading image", e);
         }
     }
 

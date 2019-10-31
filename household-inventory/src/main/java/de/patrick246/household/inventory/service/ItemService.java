@@ -70,4 +70,18 @@ public class ItemService {
     public void deleteItem(ObjectId id) {
         itemRepository.deleteById(id);
     }
+
+    public void uploadFile(ObjectId id, String name, byte[] content) {
+        if (!itemRepository.existsById(id)) {
+            throw new ResourceNotFoundException("item", id.toString());
+        }
+
+        Picture picture = Picture.builder()
+                .id(id)
+                .name(name)
+                .data(content)
+                .build();
+        pictureRepository.save(picture);
+    }
+
 }
