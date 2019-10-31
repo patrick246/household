@@ -4,3 +4,24 @@ services:
     image: mongo
     ports:
       - 27017:27017
+  keycloak:
+    image: jboss/keycloak
+    ports:
+      - 8180:8080
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: household
+      DB_ADDR: "keycloakdb:5432"
+      DB_USER: keycloak
+      DB_PASSWORD: household
+  keycloakdb:
+    image: postgres
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: household
+      POSTGRES_DB: keycloak
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - keycloakdbdata:/var/lib/postgresql/data/pgdata
+volumes:
+  keycloakdbdata:
