@@ -1,0 +1,9 @@
+{
+  "/api/inventory": {
+    "target": "http://localhost:8080/",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/inventory": ""
+    }
+  }
+}

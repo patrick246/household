@@ -1,0 +1,41 @@
+.missing-data {
+  color: #aaa;
+  font-style: italic;
+}
+
+.item-card {
+  &:not(:first-of-type) {
+    margin-top: 16px;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 16px;
+  }
+}
+
+.two-side {
+  display: flex;
+  flex-direction: row;
+
+  height: calc(100% - 64px);
+
+  overflow: hidden;
+
+  div {
+    flex: 1;
+  }
+}
+
+.editor {
+  background-color: white;
+  height: 100%;
+}
+
+.item-list {
+  overflow: auto;
+}
+
+.counter-button {
+  display: flex;
+  flex-direction: row;
+}

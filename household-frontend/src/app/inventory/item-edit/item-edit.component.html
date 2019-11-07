@@ -1,0 +1,79 @@
+<div class="toolbar">
+  <button mat-button color="primary">Save</button>
+  <button mat-button>Cancel</button>
+</div>
+<mat-divider></mat-divider>
+<div class="household-content-container">
+  <form #form="ngForm" class="item-form">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="item.name" name="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="item.location" name="location">
+    </mat-form-field>
+
+    <div class="no-input-field">
+      <mat-label>Current count: {{item.count}}</mat-label>
+      <mat-slider [(ngModel)]="item.count" name="count" min="0" max="50" thumbLabel
+                  tickInterval="1"></mat-slider>
+    </div>
+
+    <div class="no-input-field" *ngIf="item.target !== undefined else noTarget">
+      <mat-label>Count target: {{item.target}}</mat-label>
+      <mat-slider [(ngModel)]="item.target" name="target" min="0" max="50" thumbLabel tickInterval="1"></mat-slider>
+      <button mat-button color="warn" (click)="item.target = undefined">Remove target</button>
+    </div>
+    <ng-template #noTarget>
+      <div class="no-input-field">
+        <mat-label>Count target</mat-label>
+        <button mat-stroked-button (click)="item.target = 1">Set target</button>
+      </div>
+    </ng-template>
+
+    <div *ngIf="item.value !== undefined else noValue">
+      <mat-form-field>
+        <mat-label>Value in EUR</mat-label>
+        <input matInput type="number" step="0.01" [ngModel]="(item.value / 100)"
+               (ngModelChange)="item.value = $event * 100" name="value">
+      </mat-form-field>
+      <button style="width: 100%" mat-button color="warn" (click)="item.value = undefined">Remove value</button>
+    </div>
+    <ng-template #noValue>
+      <div class="no-input-field">
+        <mat-label>Value in EUR</mat-label>
+        <button mat-stroked-button (click)="item.value = 0">Set value</button>
+      </div>
+    </ng-template>
+
+    <div *ngIf="item.barcode !== undefined else noBarcode">
+      <mat-form-field>
+        <mat-label>Number under the barcode</mat-label>
+        <input matInput [(ngModel)]="item.barcode" name="barcode">
+      </mat-form-field>
+      <button mat-button style="width: 100%" color="warn" (click)="item.barcode = undefined">Remove barcode</button>
+    </div>
+    <ng-template #noBarcode>
+      <div class="no-input-field">
+        <mat-label>Barcode number</mat-label>
+        <button mat-stroked-button (click)="item.barcode = ''">Set barcode</button>
+      </div>
+    </ng-template>
+
+    <div *ngIf="item.description !== undefined else noDescription">
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="item.description" name="location"></textarea>
+      </mat-form-field>
+      <button mat-button style="width: 100%" color="warn" (click)="item.description = undefined">Remove description
+      </button>
+    </div>
+    <ng-template #noDescription>
+      <div class="no-input-field">
+        <mat-label>Description</mat-label>
+        <button mat-stroked-button (click)="item.description = ''">Set description</button>
+      </div>
+    </ng-template>
+  </form>
+</div>
