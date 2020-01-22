@@ -27,7 +27,7 @@ public class ItemService {
     }
 
     public Page<Item> findItemsByName(int page, int size, String name) {
-        return itemRepository.findItemByNameContaining(name, PageRequest.of(page, size));
+        return itemRepository.findItemByNameContainingIgnoreCase(name, PageRequest.of(page, size));
     }
 
     public Optional<Item> findById(ObjectId id) {

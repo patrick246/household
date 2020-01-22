@@ -1,0 +1,6 @@
+<app-item-edit [item]="item" *ngIf="item else loading" (save)="onSave($event)" (cancel)="onCancel()"></app-item-edit>
+<ng-template #loading>
+  <div class="household-content-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>

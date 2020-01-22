@@ -1,6 +1,6 @@
 <div class="toolbar">
-  <button mat-button color="primary">Save</button>
-  <button mat-button>Cancel</button>
+  <button mat-button color="primary" (click)="doSave()">Save</button>
+  <button mat-button (click)="doCancel()">Cancel</button>
 </div>
 <mat-divider></mat-divider>
 <div class="household-content-container">
@@ -64,7 +64,7 @@
     <div *ngIf="item.description !== undefined else noDescription">
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea matInput [(ngModel)]="item.description" name="location"></textarea>
+        <textarea matInput [(ngModel)]="item.description" name="description"></textarea>
       </mat-form-field>
       <button mat-button style="width: 100%" color="warn" (click)="item.description = undefined">Remove description
       </button>
@@ -77,3 +77,12 @@
     </ng-template>
   </form>
 </div>
+
+<ng-template #closeDialog>
+  <h2 matDialogTitle>Close editor</h2>
+  <mat-dialog-content>Are you sure</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button color="warn" [mat-dialog-close]="true">Lose all changes</button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+  </mat-dialog-actions>
+</ng-template>

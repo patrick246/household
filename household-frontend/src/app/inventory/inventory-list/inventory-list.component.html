@@ -1,32 +1,39 @@
 <div class="two-side">
-  <div class="household-content-container item-list">
-    <mat-card *ngFor="let item of (items$ | async)" class="item-card">
-      <mat-card-title>{{item.name}}</mat-card-title>
-      <mat-card-subtitle *ngIf="item.location else noLocation">{{item.location}}</mat-card-subtitle>
-      <ng-template #noLocation>
-        <mat-card-subtitle class="missing-data">Nowhere to be found</mat-card-subtitle>
-      </ng-template>
-      <mat-card-content *ngIf="item.description else noDescription">
-        {{item.description}}
-      </mat-card-content>
-      <ng-template #noDescription>
-        <mat-card-content class="missing-data">No description, you wouldn't believe me anyway</mat-card-content>
-      </ng-template>
-      <mat-card-actions>
-        <button mat-button (click)="edit(item)">Edit</button>
-      </mat-card-actions>
-    </mat-card>
+  <div class="household-content-container item-list" [style.display]="shouldShowList ? 'block' : 'none'">
+    <app-item-search (onValueChange)="search($event)"></app-item-search>
+    <div *ngIf="items$ | async as items">
+      <mat-card *ngFor="let item of items.data" class="item-card">
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle *ngIf="item.location else noLocation">{{item.location}}</mat-card-subtitle>
+        <ng-template #noLocation>
+          <mat-card-subtitle class="missing-data">Nowhere to be found</mat-card-subtitle>
+        </ng-template>
+        <mat-card-content *ngIf="item.description else noDescription" class="pre-wrapped">{{item.description}}
+        </mat-card-content>
+        <ng-template #noDescription>
+          <mat-card-content class="missing-data">No description, you wouldn't believe me anyway</mat-card-content>
+        </ng-template>
+        <mat-card-actions>
+          <button mat-button (click)="edit(item)">Edit</button>
+          <button mat-button color="warn" (click)="delete(item)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-divider></mat-divider>
+      <mat-paginator class="paginator" pageSize="5" [length]="items.total" (page)="onNewPage($event)"></mat-paginator>
+    </div>
+    <button class="add-button" mat-raised-button color="primary" (click)="add()">Add item</button>
+
   </div>
-  <div class="editor" *ngIf="editItem">
-    <app-item-edit [item]="editItem"></app-item-edit>
+  <div class="editor" [style.display]="itemEditOutlet.isActivated ? 'block' : 'none'">
+    <router-outlet #itemEditOutlet="outlet"></router-outlet>
   </div>
 </div>
 
-<ng-template #closeDialog>
-  <h2 matDialogTitle>Close editor</h2>
+<ng-template #deleteVerification>
+  <h2 matDialogTitle>Delete inventory item</h2>
   <mat-dialog-content>Are you sure</mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button color="warn" [mat-dialog-close]="true">Lose all changes</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button color="warn" [mat-dialog-close]="true">Delete item</button>
+    <button mat-button [mat-dialog-close]="false">Keep item</button>
   </mat-dialog-actions>
 </ng-template>

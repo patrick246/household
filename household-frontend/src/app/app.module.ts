@@ -15,16 +15,31 @@ import {OAuthModule} from "angular-oauth2-oidc";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import {InventoryListComponent} from './inventory/inventory-list/inventory-list.component';
-import {MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSliderModule} from "@angular/material";
+import {
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSliderModule,
+  MatSnackBarModule
+} from "@angular/material";
 import {ItemEditComponent} from './inventory/item-edit/item-edit.component';
 import {FormsModule} from "@angular/forms";
+import {ItemEditViewComponent} from './inventory/item-edit-view/item-edit-view.component';
+import {ItemCreateViewComponent} from './inventory/item-create-view/item-create-view.component';
+import {ItemSearchComponent} from './inventory/item-search/item-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     InventoryListComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    ItemEditViewComponent,
+    ItemCreateViewComponent,
+    ItemSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +64,10 @@ import {FormsModule} from "@angular/forms";
     }),
     MatFormFieldModule,
     MatDialogModule,
-    MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,7 @@ export class AppComponent {
 
   constructor(private oauthService: OAuthService) {
     this.oauthService.configure(oAuthConfig);
+    this.oauthService.setupAutomaticSilentRefresh();
     this.oauthService.tokenValidationHandler = new NullValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin()
       .then(() => {

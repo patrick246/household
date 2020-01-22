@@ -8,9 +8,11 @@
     margin-top: 16px;
   }
 
-  &:not(:last-of-type) {
-    margin-bottom: 16px;
-  }
+  margin-bottom: 16px;
+}
+
+.add-button {
+  margin-top: 16px;
 }
 
 .two-side {
@@ -29,6 +31,7 @@
 .editor {
   background-color: white;
   height: 100%;
+  overflow: auto;
 }
 
 .item-list {
@@ -38,4 +41,12 @@
 .counter-button {
   display: flex;
   flex-direction: row;
+}
+
+.pre-wrapped {
+  white-space: pre-wrap;
+}
+
+.paginator {
+  margin-top: 16px;
 }

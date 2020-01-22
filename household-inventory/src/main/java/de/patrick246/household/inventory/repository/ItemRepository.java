@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ItemRepository extends PagingAndSortingRepository<Item, ObjectId> {
-    Page<Item> findItemByNameContaining(String name, Pageable pageable);
+    Page<Item> findItemByNameContainingIgnoreCase(String name, Pageable pageable);
 }

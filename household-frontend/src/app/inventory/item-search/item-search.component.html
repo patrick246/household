@@ -1,0 +1,12 @@
+<div class="search">
+  <h2 class="heading" (click)="toggle()">Search
+    <ng-container *ngIf="!open else opened">&#x203a;</ng-container>
+  </h2>
+  <ng-template #opened>&#x2304;</ng-template>
+  <form *ngIf="open">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput (input)="onValueChange.emit($event.target.value)">
+    </mat-form-field>
+  </form>
+</div>
