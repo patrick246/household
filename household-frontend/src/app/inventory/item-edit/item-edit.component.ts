@@ -10,8 +10,10 @@ import {MatDialog} from "@angular/material";
 })
 export class ItemEditComponent implements OnInit {
 
+  public scanning: boolean = false;
+
   @Input()
-  private item: Item;
+  public item: Item;
 
   @Output()
   private save: EventEmitter<Item> = new EventEmitter<Item>();

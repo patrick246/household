@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
-import {PaginationResult} from "./PaginationResult";
+import {PaginationResult} from "../../api/PaginationResult";
 import {Item} from "./Item";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";

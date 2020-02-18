@@ -1,0 +1,12 @@
+<div class="content">
+  <ng-container *ngIf="households$ | async as households; else loadingHouseholds">
+    <div class="household-list">
+      <app-household-card *ngFor="let household of households.data" [household]="household"></app-household-card>
+    </div>
+    <mat-paginator [pageIndex]="households.page" [length]="households.total"
+                   [pageSize]="households.size"></mat-paginator>
+  </ng-container>
+  <ng-template #loadingHouseholds>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

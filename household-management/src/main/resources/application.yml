@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/auth/realms/household
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/household-mgmt
+de:
+  patrick246:
+    household:
+      management:
+        keycloak:
+          url: http://localhost:8180/auth
+          realm: household
+          clientId: household-mgmt
+          clientSecret: 1aa6d776-9312-4f66-9696-13ed3270f03e

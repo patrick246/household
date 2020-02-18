@@ -4,3 +4,8 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8180/auth/realms/household
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus

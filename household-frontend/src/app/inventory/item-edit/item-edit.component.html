@@ -52,6 +52,11 @@
         <mat-label>Number under the barcode</mat-label>
         <input matInput [(ngModel)]="item.barcode" name="barcode">
       </mat-form-field>
+      <ng-container *ngIf="scanning">
+        <zxing-scanner (scanError)="scanning = false" (scanFailure)="scanning = false"
+                       (scanSuccess)="item.barcode = $event"></zxing-scanner>
+      </ng-container>
+      <button mat-button style="width: 100%" color="primary" (click)="scanning = true">Scan barcode</button>
       <button mat-button style="width: 100%" color="warn" (click)="item.barcode = undefined">Remove barcode</button>
     </div>
     <ng-template #noBarcode>

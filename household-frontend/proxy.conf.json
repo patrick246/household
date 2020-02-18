@@ -5,5 +5,12 @@
     "pathRewrite": {
       "^/api/inventory": ""
     }
+  },
+  "/api/management": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/management": ""
+    }
   }
 }

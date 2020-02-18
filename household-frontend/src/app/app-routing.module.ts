@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {InventoryListComponent} from "./inventory/inventory-list/inventory-list.component";
 import {ItemEditViewComponent} from "./inventory/item-edit-view/item-edit-view.component";
 import {ItemCreateViewComponent} from "./inventory/item-create-view/item-create-view.component";
+import {HouseholdManagementComponent} from "./household-management/household-management.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
         component: ItemEditViewComponent
       }
     ]
+  },
+  {
+    path: 'households',
+    component: HouseholdManagementComponent
   }
 
 ];

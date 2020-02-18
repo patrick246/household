@@ -5,7 +5,13 @@
 export const environment = {
   production: false,
   backends: {
-    inventory: '/api/inventory'
+    inventory: '/api/inventory',
+    management: '/api/management'
+  },
+  oidc: {
+    client_id: 'household',
+    issuer: 'http://localhost:8180/auth/realms/household',
+    redirect_uri: 'http://localhost:4200/'
   }
 };
 

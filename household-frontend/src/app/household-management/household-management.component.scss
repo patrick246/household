@@ -1,0 +1,21 @@
+.content {
+  padding: 16px;
+}
+
+.household-list {
+  display: flex;
+  flex-direction: row;
+  margin: 32px 0;
+
+  app-household-card {
+    margin: 0 16px;
+    width: 300px;
+    @media (min-width: 359px) {
+      width: 320px;
+    }
+    @media (min-width: 719px) {
+      width: 700px;
+    }
+  }
+}
+

@@ -1,6 +1,5 @@
-package de.patrick246.household.inventory.configuration;
+package de.patrick246.household.management.configuration;
 
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,9 +17,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
                 .and()
-                .authorizeRequests(authorize -> authorize
-                        .requestMatchers(EndpointRequest.to("prometheus", "health", "info")).permitAll()
-                )
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()

@@ -22,6 +22,7 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatSliderModule,
   MatSnackBarModule
 } from "@angular/material";
@@ -30,6 +31,10 @@ import {FormsModule} from "@angular/forms";
 import {ItemEditViewComponent} from './inventory/item-edit-view/item-edit-view.component';
 import {ItemCreateViewComponent} from './inventory/item-create-view/item-create-view.component';
 import {ItemSearchComponent} from './inventory/item-search/item-search.component';
+import {ZXingScannerModule} from "@zxing/ngx-scanner";
+import {HouseholdManagementComponent} from './household-management/household-management.component';
+import {HouseholdCardComponent} from './household-management/household-card/household-card.component';
+import {RoleFilterPipe} from './household-management/household-card/role-filter/role-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import {ItemSearchComponent} from './inventory/item-search/item-search.component
     ItemEditComponent,
     ItemEditViewComponent,
     ItemCreateViewComponent,
-    ItemSearchComponent
+    ItemSearchComponent,
+    HouseholdManagementComponent,
+    HouseholdCardComponent,
+    RoleFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,9 @@ import {ItemSearchComponent} from './inventory/item-search/item-search.component
     MatSliderModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ZXingScannerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

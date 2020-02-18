@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>{{household.name}}</mat-card-title>
+  <mat-card-content>{{household.description}}</mat-card-content>
+  <h3 class="household-subheader">Household members</h3>
+  <mat-list>
+    <ng-container *ngFor="let roleMapping of household.roleMappings | keyvalue">
+      <mat-divider></mat-divider>
+      <mat-list-item class="household-role-item">
+        <div>
+          {{roleMapping.key}}
+        </div>
+        <mat-select [value]="roleMapping.value">
+          <mat-option value="OWNER">Owner</mat-option>
+          <mat-option value="MEMBER">Member</mat-option>
+        </mat-select>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</mat-card>

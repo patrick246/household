@@ -1,0 +1,19 @@
+:host {
+  margin: 2px;
+}
+
+.household-subheader {
+  color: #999;
+  font-size: 12pt;
+  margin-bottom: 0;
+}
+
+::ng-deep .household-role-item .mat-list-item-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+mat-select {
+  width: 70px;
+}

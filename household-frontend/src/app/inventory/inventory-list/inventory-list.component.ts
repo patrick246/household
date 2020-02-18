@@ -7,7 +7,7 @@ import {ItemEditComponent} from "../item-edit/item-edit.component";
 import {MatDialog, MatPaginator, PageEvent} from "@angular/material";
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {PaginationResult} from "../service/PaginationResult";
+import {PaginationResult} from "../../api/PaginationResult";
 
 @Component({
   selector: 'app-inventory-list',
