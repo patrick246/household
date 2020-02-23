@@ -19,16 +19,16 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
   public items$: Observable<PaginationResult<Item[]>>;
   public shouldShowList: boolean;
 
-  @ViewChild(ItemEditComponent, {static: false})
+  @ViewChild(ItemEditComponent)
   public editor: ItemEditComponent;
 
-  @ViewChild('itemEditOutlet', {static: false})
+  @ViewChild('itemEditOutlet')
   public routerOutlet: RouterOutlet;
 
-  @ViewChild('deleteVerification', {static: false})
+  @ViewChild('deleteVerification')
   public deleteVerificationModal: TemplateRef<unknown>;
 
-  @ViewChild(MatPaginator, {static: false})
+  @ViewChild(MatPaginator)
   public pagination: MatPaginator;
 
   private searchTerm: Subject<string> = new BehaviorSubject<string>(null);

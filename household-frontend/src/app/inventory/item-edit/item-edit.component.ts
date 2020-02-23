@@ -21,10 +21,10 @@ export class ItemEditComponent implements OnInit {
   @Output()
   private cancel: EventEmitter<void> = new EventEmitter<void>();
 
-  @ViewChild('form', {static: false})
+  @ViewChild('form')
   private form: NgForm;
 
-  @ViewChild('closeDialog', {static: false})
+  @ViewChild('closeDialog')
   public closeDialog: TemplateRef<unknown>;
 
   constructor(private dialog: MatDialog) {
