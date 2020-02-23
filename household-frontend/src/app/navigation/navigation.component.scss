@@ -8,10 +8,62 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  margin-top: 16px;
+
+  .user-switch {
+    align-self: end;
+  }
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+mat-nav-list {
+  padding: 8px;
+
+  a.mat-list-item {
+    border-radius: 4px;
+    margin-bottom: 8px;
+    height: 48px;
+  }
+
+  .nav-label {
+    font-weight: bold;
+  }
+}
+
+::ng-deep mat-nav-list.mat-list-base .mat-list-item .mat-list-item-content {
+  padding: 0 4px;
+}
+
+.active {
+  background-color: #e8eaf6;
+  color: #3f51b5;
+
+  &:hover, &:active {
+    background-color: #c5cae9;
+  }
+
+  &:focus {
+    background-color: #e8eaf6;
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 18px;
+
+  line-height: 22px;
+
+  .heading-bottom {
+    font-weight: lighter;
+    font-size: 16px;
+  }
 }

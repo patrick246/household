@@ -20,6 +20,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
+  MatMenuModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
@@ -77,7 +78,8 @@ import {RoleFilterPipe} from './household-management/household-card/role-filter/
     MatSnackBarModule,
     MatPaginatorModule,
     ZXingScannerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
