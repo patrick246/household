@@ -11,6 +11,58 @@
   margin-bottom: 16px;
 }
 
+.item {
+  padding: 0;
+  cursor: pointer;
+
+  p.mat-line {
+    color: #aaa;
+  }
+
+  .second-column {
+    flex-shrink: 1;
+    flex-grow: 1;
+    min-width: 0;
+
+    div {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      color: #aaa;
+
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:first-of-type {
+        color: #111;
+      }
+    }
+  }
+
+  .additional-information {
+    color: #999;
+    margin-left: 8px;
+    text-align: right;
+  }
+
+  .count-warning {
+    color: #ffc107;
+  }
+}
+
+::ng-deep .mat-list-base .mat-list-item.item-desktop .mat-list-text {
+  width: 30%;
+  flex-shrink: 0;
+}
+
+::ng-deep .mat-list-item.item .mat-list-item-content {
+  margin: 0;
+  padding: 0;
+}
+
 .add-button {
   margin-top: 16px;
 }
@@ -23,7 +75,7 @@
 
   overflow: hidden;
 
-  div {
+  & > div {
     flex: 1;
   }
 }
@@ -32,6 +84,7 @@
   background-color: white;
   height: 100%;
   overflow: auto;
+  border-radius: 16px;
 }
 
 .item-list {

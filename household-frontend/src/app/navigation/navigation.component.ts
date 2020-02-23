@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {merge, Observable, of} from 'rxjs';
 import {filter, map, shareReplay, tap} from 'rxjs/operators';
 import {OAuthEvent, OAuthService} from "angular-oauth2-oidc";
 import {IdToken} from "../api/IdToken.model";
+import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-navigation',
@@ -19,6 +20,9 @@ export class NavigationComponent implements OnInit {
     );
 
   public user: IdToken;
+
+  @ViewChild('drawer')
+  private drawer: MatSidenav;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -38,6 +42,12 @@ export class NavigationComponent implements OnInit {
       filter(claims => claims != null),
       tap(claims => console.log('Id token claims', claims))
     ).subscribe(claims => this.user = claims as IdToken);
+  }
+
+  closeDrawer() {
+    if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
+      this.drawer.close();
+    }
   }
 
   openAccountPage() {

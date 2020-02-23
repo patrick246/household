@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
 import {InventoryService} from "../service/inventory.service";
 import {Item} from "../service/Item";
-import {MatSnackBar} from "@angular/material";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-item-edit-view',
@@ -32,7 +32,7 @@ export class ItemEditViewComponent implements OnInit {
   }
 
   onSave(item: Item) {
-    this.inventoryService.update(item).subscribe(result => {
+    this.inventoryService.update(item).subscribe(() => {
       this.snackbar.open('Item saved', 'Dismiss', {duration: 1000});
     });
   }

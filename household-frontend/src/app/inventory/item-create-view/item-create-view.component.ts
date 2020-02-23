@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Item} from "../service/Item";
 import {InventoryService} from "../service/inventory.service";
-import {MatSnackBar} from "@angular/material";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 
 @Component({
@@ -25,7 +25,7 @@ export class ItemCreateViewComponent implements OnInit {
   }
 
   create() {
-    this.inventoryService.create(this.item).subscribe(result => {
+    this.inventoryService.create(this.item).subscribe(() => {
       this.snackbar.open('Item saved', 'Dismiss', {duration: 1000});
     });
   }

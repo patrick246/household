@@ -1,30 +1,38 @@
 <div class="two-side">
   <div class="household-content-container item-list" [style.display]="shouldShowList ? 'block' : 'none'">
     <app-item-search (onValueChange)="search($event)"></app-item-search>
-    <div *ngIf="items$ | async as items">
-      <mat-card *ngFor="let item of items.data" class="item-card">
-        <mat-card-title>{{item.name}}</mat-card-title>
-        <mat-card-subtitle *ngIf="item.location else noLocation">{{item.location}}</mat-card-subtitle>
-        <ng-template #noLocation>
-          <mat-card-subtitle class="missing-data">Nowhere to be found</mat-card-subtitle>
-        </ng-template>
-        <mat-card-content *ngIf="item.description else noDescription" class="pre-wrapped">{{item.description}}
-        </mat-card-content>
-        <ng-template #noDescription>
-          <mat-card-content class="missing-data">No description, you wouldn't believe me anyway</mat-card-content>
-        </ng-template>
-        <mat-card-actions>
-          <button mat-button (click)="edit(item)">Edit</button>
-          <button mat-button color="warn" (click)="delete(item)">Delete</button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-divider></mat-divider>
-      <mat-paginator class="paginator" pageSize="5" [length]="items.total" (page)="onNewPage($event)"></mat-paginator>
-    </div>
-    <button class="add-button" mat-raised-button color="primary" (click)="add()">Add item</button>
+    <mat-card *ngIf="items$ | async as items">
+      <mat-list>
+        <mat-list-item class="item" [class.item-mobile]="(isHandset$ | async)"
+                       [class.item-desktop]="!(isHandset$ | async)" *ngFor="let item of items.data"
+                       (click)="edit(item)">
+          <img mat-list-avatar src="assets/unknown-item.svg" alt="No photo available">
+          <h3 matLine>{{item.name}}</h3>
+          <p matLine *ngIf="(isHandset$ | async)">
+            <span *ngIf="item.location">{{item.location}}</span>
+            <span *ngIf="item.description"> &mdash; {{item.description | slice:0:50}}</span>
+          </p>
+          <div class="second-column" *ngIf="!(isHandset$ | async)">
+            <div *ngIf="item.location">{{item.location}}</div>
+            <div *ngIf="item.description">{{item.description}}</div>
+          </div>
 
+          <div class="additional-information">
+            <div *ngIf="item.count !== undefined && item.target !== undefined && item.count < item.target"
+                 class="count-warning">
+              {{item.count}} of {{item.target}}
+            </div>
+            <div *ngIf="item.value !== undefined">
+              {{item.value / 100 | currency:'EUR'}}
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <mat-paginator class="paginator" pageSize="10" [length]="items.total" (page)="onNewPage($event)"></mat-paginator>
+    </mat-card>
+    <button class="add-button" mat-raised-button color="primary" (click)="add()">Add item</button>
   </div>
-  <div class="editor" [style.display]="itemEditOutlet.isActivated ? 'block' : 'none'">
+  <div class="editor mat-elevation-z8" [@openClose]="itemEditOutlet.isActivated ? 'open' : 'closed'">
     <router-outlet #itemEditOutlet="outlet"></router-outlet>
   </div>
 </div>

@@ -2,22 +2,49 @@ import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular
 import {InventoryService} from "../service/inventory.service";
 import {Item} from "../service/Item";
 import {BehaviorSubject, combineLatest, concat, merge, Observable, of, Subject} from "rxjs";
-import {debounceTime, distinctUntilChanged, flatMap, map} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, flatMap, map, shareReplay, tap} from "rxjs/operators";
 import {ItemEditComponent} from "../item-edit/item-edit.component";
-import {MatDialog, MatPaginator, PageEvent} from "@angular/material";
+import {MatDialog} from "@angular/material/dialog";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {PaginationResult} from "../../api/PaginationResult";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
-  styleUrls: ['./inventory-list.component.scss']
+  styleUrls: ['./inventory-list.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'block',
+        transform: 'translateX(0%)'
+      })),
+      state('closed', style({
+        display: 'none',
+        transform: 'translateX(100%)'
+      })),
+      transition('open => closed', [
+        animate('0.2s', keyframes([
+          style({transform: 'translateX(0%)', offset: 0}),
+          style({transform: 'translateX(100%)', display: 'none', offset: 1})
+        ]))
+      ]),
+      transition('closed => open', [
+        animate('0.2s', keyframes([
+          style({transform: 'translateX(100%)', display: 'block', offset: 0}),
+          style({transform: 'translateX(0%)', offset: 1})
+        ]))
+      ])
+    ])
+  ]
 })
 export class InventoryListComponent implements OnInit, AfterViewInit {
 
   public items$: Observable<PaginationResult<Item[]>>;
   public shouldShowList: boolean;
+  public isHandset$: Observable<boolean>;
 
   @ViewChild(ItemEditComponent)
   public editor: ItemEditComponent;
@@ -44,6 +71,13 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     console.log(this.routerOutlet);
+
+    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        tap(event => console.log(event)),
+        map(result => result.matches),
+        shareReplay()
+      );
 
     this.items$ = combineLatest(
       this.activatedRoute.paramMap.pipe(

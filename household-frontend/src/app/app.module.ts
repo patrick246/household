@@ -15,18 +15,16 @@ import {OAuthModule} from "angular-oauth2-oidc";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import {InventoryListComponent} from './inventory/inventory-list/inventory-list.component';
-import {
-  MatCardModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatMenuModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSelectModule,
-  MatSliderModule,
-  MatSnackBarModule
-} from "@angular/material";
+import {MatCardModule} from "@angular/material/card";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ItemEditComponent} from './inventory/item-edit/item-edit.component';
 import {FormsModule} from "@angular/forms";
 import {ItemEditViewComponent} from './inventory/item-edit-view/item-edit-view.component';

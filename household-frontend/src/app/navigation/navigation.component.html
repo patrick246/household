@@ -4,7 +4,7 @@
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="(isHandset$ | async) === false">
     <div class="sidenav-image" *ngIf="(isHandset$ | async)">
-      <img src="assets/household-300.jpg" width="300" height="200">
+      <img src="assets/household-300.jpg" width="300" height="200" alt="" role="presentation">
     </div>
     <mat-toolbar *ngIf="user">
       <div class="heading">
@@ -21,11 +21,11 @@
     </mat-menu>
     <mat-divider></mat-divider>
     <mat-nav-list>
-      <a mat-list-item routerLinkActive="active" routerLink="/households" (click)="drawer.close()">
+      <a mat-list-item routerLinkActive="active" routerLink="/households" (click)="closeDrawer()">
         <mat-icon matListIcon>house</mat-icon>
         <div mat-line class="nav-label">Households</div>
       </a>
-      <a mat-list-item routerLinkActive="active" routerLink="/inventory" (click)="drawer.close()">
+      <a mat-list-item routerLinkActive="active" routerLink="/inventory" (click)="closeDrawer()">
         <mat-icon matListIcon>list</mat-icon>
         <div mat-line class="nav-label">Inventory</div>
       </a>

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Item} from "../service/Item";
 import {NgForm} from "@angular/forms";
-import {MatDialog} from "@angular/material";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-item-edit',
