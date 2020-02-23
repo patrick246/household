@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {merge, Observable, of} from 'rxjs';
 import {filter, map, shareReplay, tap} from 'rxjs/operators';
 import {OAuthEvent, OAuthService} from "angular-oauth2-oidc";
 import {IdToken} from "../api/IdToken.model";
@@ -27,10 +27,15 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authentication.events.pipe(
-      filter(event => event instanceof OAuthEvent),
-      filter(event => event.type === 'token_refreshed'),
-      map(() => this.authentication.getIdentityClaims()),
+    merge(
+      of(this.authentication.getIdentityClaims()),
+      this.authentication.events.pipe(
+        filter(event => event instanceof OAuthEvent),
+        filter(event => event.type === 'token_refreshed'),
+        map(() => this.authentication.getIdentityClaims())
+      )
+    ).pipe(
+      filter(claims => claims != null),
       tap(claims => console.log('Id token claims', claims))
     ).subscribe(claims => this.user = claims as IdToken);
   }
