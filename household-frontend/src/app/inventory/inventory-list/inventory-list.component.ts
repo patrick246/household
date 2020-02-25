@@ -10,6 +10,8 @@ import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {PaginationResult} from "../../api/PaginationResult";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
+import {environment} from "../../../environments/environment";
+import {HouseholdContextService} from "../../household-management/context/household-context.service";
 
 @Component({
   selector: 'app-inventory-list',
@@ -45,6 +47,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
   public items$: Observable<PaginationResult<Item[]>>;
   public shouldShowList: boolean;
   public isHandset$: Observable<boolean>;
+  public itemImageBase: string;
 
   @ViewChild(ItemEditComponent)
   public editor: ItemEditComponent;
@@ -66,11 +69,14 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
+    private householdContext: HouseholdContextService,
   ) {
   }
 
   ngOnInit() {
     console.log(this.routerOutlet);
+
+    this.itemImageBase = `${environment.backends.inventory}/${this.householdContext.getSelectedHouseholdId()}/items/id/`;
 
     this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(

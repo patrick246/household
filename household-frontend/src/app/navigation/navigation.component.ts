@@ -5,6 +5,8 @@ import {filter, map, shareReplay, tap} from 'rxjs/operators';
 import {OAuthEvent, OAuthService} from "angular-oauth2-oidc";
 import {IdToken} from "../api/IdToken.model";
 import {MatSidenav} from "@angular/material/sidenav";
+import {Household} from "../household-management/service/household.model";
+import {HouseholdContextService} from "../household-management/context/household-context.service";
 
 @Component({
   selector: 'app-navigation',
@@ -20,14 +22,17 @@ export class NavigationComponent implements OnInit {
     );
 
   public user: IdToken;
+  public household$: Observable<Household>;
 
   @ViewChild('drawer')
   private drawer: MatSidenav;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authentication: OAuthService
+    private authentication: OAuthService,
+    private householdContext: HouseholdContextService
   ) {
+    this.household$ = this.householdContext.household$;
   }
 
   ngOnInit(): void {

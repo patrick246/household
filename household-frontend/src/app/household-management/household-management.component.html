@@ -1,7 +1,11 @@
 <div class="content">
   <ng-container *ngIf="households$ | async as households; else loadingHouseholds">
     <div class="household-list">
-      <app-household-card *ngFor="let household of households.data" [household]="household"></app-household-card>
+      <app-household-card
+        *ngFor="let household of households.data"
+        [household]="household"
+        (selected)="select(household)"
+        (deleted)="delete(household)"></app-household-card>
     </div>
     <mat-paginator [pageIndex]="households.page" [length]="households.total"
                    [pageSize]="households.size"></mat-paginator>
@@ -10,3 +14,12 @@
     <mat-spinner></mat-spinner>
   </ng-template>
 </div>
+
+<ng-template #deleteVerification>
+  <h2 matDialogTitle>Delete household</h2>
+  <mat-dialog-content>Are you sure</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button color="warn" [mat-dialog-close]="true">Delete</button>
+    <button mat-button [mat-dialog-close]="false">Keep</button>
+  </mat-dialog-actions>
+</ng-template>

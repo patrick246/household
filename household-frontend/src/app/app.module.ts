@@ -34,6 +34,7 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {HouseholdManagementComponent} from './household-management/household-management.component';
 import {HouseholdCardComponent} from './household-management/household-card/household-card.component';
 import {RoleFilterPipe} from './household-management/household-card/role-filter/role-filter.pipe';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {RoleFilterPipe} from './household-management/household-card/role-filter/
     MatPaginatorModule,
     ZXingScannerModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

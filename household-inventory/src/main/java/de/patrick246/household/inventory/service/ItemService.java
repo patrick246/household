@@ -22,24 +22,28 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final PictureRepository pictureRepository;
 
-    public Page<Item> getItemsPaginated(int page, int size) {
-        return itemRepository.findAll(PageRequest.of(page, size, Sort.by("name")));
+    public Page<Item> getItemsPaginated(String household, int page, int size) {
+        return itemRepository.findItemsByHousehold(household, PageRequest.of(page, size, Sort.by("name")));
     }
 
-    public Page<Item> findItemsByName(int page, int size, String name) {
-        return itemRepository.findItemByNameContainingIgnoreCase(name, PageRequest.of(page, size));
+    public Page<Item> findItemsByName(String household, int page, int size, String name) {
+        return itemRepository.findItemByHouseholdAndNameContainingIgnoreCase(household, name, PageRequest.of(page, size, Sort.by("name")));
     }
 
-    public Optional<Item> findById(ObjectId id) {
-        return itemRepository.findById(id);
+    public Optional<Item> findById(String household, ObjectId id) {
+        return itemRepository.findByHouseholdAndId(household, id);
     }
 
-    public Optional<Picture> findPictureById(ObjectId id) {
-        return pictureRepository.findById(id);
+    public Optional<Picture> findPictureById(String household, ObjectId id) {
+        if (itemRepository.existsByHouseholdAndId(household, id)) {
+            return pictureRepository.findById(id);
+        }
+        return Optional.empty();
     }
 
-    public Item createItem(NewItemContainer newItem) {
+    public Item createItem(String household, NewItemContainer newItem) {
         var item = Item.builder()
+                .household(household)
                 .name(newItem.getName())
                 .location(newItem.getLocation())
                 .count(newItem.getCount() != null ? newItem.getCount() : 0)
@@ -52,8 +56,8 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public Item modifyItem(ObjectId id, NewItemContainer modifiedItem) {
-        return itemRepository.findById(id)
+    public Item modifyItem(String household, ObjectId id, NewItemContainer modifiedItem) {
+        return itemRepository.findByHouseholdAndId(household, id)
                 .map(item -> item
                         .withName(modifiedItem.getName())
                         .withLocation(modifiedItem.getLocation())
@@ -67,12 +71,12 @@ public class ItemService {
                 .orElseThrow(() -> new ResourceNotFoundException("item", id.toString()));
     }
 
-    public void deleteItem(ObjectId id) {
-        itemRepository.deleteById(id);
+    public void deleteItem(String household, ObjectId id) {
+        itemRepository.deleteByHouseholdAndId(household, id);
     }
 
-    public void uploadFile(ObjectId id, String name, byte[] content) {
-        if (!itemRepository.existsById(id)) {
+    public void uploadFile(String household, ObjectId id, String name, byte[] content) {
+        if (!itemRepository.existsByHouseholdAndId(household, id)) {
             throw new ResourceNotFoundException("item", id.toString());
         }
 

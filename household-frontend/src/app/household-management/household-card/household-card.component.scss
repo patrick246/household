@@ -8,12 +8,21 @@
   margin-bottom: 0;
 }
 
-::ng-deep .household-role-item .mat-list-item-content {
+::ng-deep .mat-list-base .household-role-item .mat-list-item-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0;
 }
 
 mat-select {
-  width: 70px;
+  width: 80px;
+}
+
+form mat-form-field {
+  width: 100%;
+}
+
+.add-user-item {
+  padding-top: 16px;
 }

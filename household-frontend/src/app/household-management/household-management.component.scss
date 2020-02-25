@@ -5,17 +5,15 @@
 .household-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 32px 0;
 
   app-household-card {
-    margin: 0 16px;
+    margin: 8px 16px;
     width: 300px;
-    @media (min-width: 359px) {
-      width: 320px;
-    }
-    @media (min-width: 719px) {
-      width: 700px;
-    }
   }
 }
 
+.mat-paginator {
+  background-color: transparent;
+}

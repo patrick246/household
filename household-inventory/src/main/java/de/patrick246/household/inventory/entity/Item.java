@@ -24,6 +24,9 @@ public class Item {
     private String location;
     @NonNull
     private int count;
+    @NonNull
+    @Indexed
+    private String household;
 
     private Integer target;
     private Integer value;

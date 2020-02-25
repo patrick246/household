@@ -40,10 +40,12 @@ public class HouseholdService {
 
     public Optional<HouseholdModel> update(HouseholdModel model, Principal principal) {
         String username = getUsername(principal);
-        return repository.findById(model.getId())
+        Optional<HouseholdModel> optional = repository.findById(model.getId())
                 .filter(household -> household.getRoleMappings().get(username) == HouseholdRole.OWNER)
                 .map(h -> model)
                 .map(repository::save);
+        optional.ifPresent(keycloakReconciliation::reconciliation);
+        return optional;
     }
 
     public Optional<HouseholdModel> delete(String id, Principal principal) {

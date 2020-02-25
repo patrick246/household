@@ -6,11 +6,12 @@
   width: 300px;
 }
 
-.sidenav .mat-toolbar {
+.sidenav .user-toolbar {
+  display: flex;
+  flex-direction: row;
   background: inherit;
   justify-content: space-between;
-  margin-bottom: 16px;
-  margin-top: 16px;
+  margin: 16px;
 
   .user-switch {
     align-self: end;
@@ -66,4 +67,10 @@ mat-nav-list {
     font-weight: lighter;
     font-size: 16px;
   }
+}
+
+.heading-household {
+  margin: 16px;
+  font-weight: lighter;
+  font-size: 14pt;
 }

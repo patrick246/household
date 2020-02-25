@@ -6,7 +6,8 @@
         <mat-list-item class="item" [class.item-mobile]="(isHandset$ | async)"
                        [class.item-desktop]="!(isHandset$ | async)" *ngFor="let item of items.data"
                        (click)="edit(item)">
-          <img mat-list-avatar src="assets/unknown-item.svg" alt="No photo available">
+          <img mat-list-avatar src="{{itemImageBase + item.id + '/image'}}" alt="No photo available"
+               onerror="this.onerror = null; this.src = 'assets/unknown-item.svg';">
           <h3 matLine>{{item.name}}</h3>
           <p matLine *ngIf="(isHandset$ | async)">
             <span *ngIf="item.location">{{item.location}}</span>
